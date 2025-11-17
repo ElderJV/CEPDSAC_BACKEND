@@ -1,7 +1,7 @@
 ### Variables de entorno
 @baseUrl = http://localhost:8080
 @contentType = application/json
-@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbHVtbm9AZ21haWwuY29tIiwiaWF0IjoxNzYzMDgwMTM5LCJleHAiOjE3NjMxNjY1Mzl9.ijS1_3T1XzFWJ_lBoQOwt_vYOxY7-D64gjYnurjqJjY
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbGRlckBnbWFpbC5jb20iLCJpYXQiOjE3NjMzNDU3NDEsImV4cCI6MTc2MzQzMjE0MX0.txsCYC-zBEDzD_zeXMUxZe39RjuhI5tatQZJEnKolEc
 ### ===========================================
 ### MONITOR ENDPOINTS
 ### ===========================================
@@ -18,8 +18,8 @@ POST {{baseUrl}}/api/auth/login
 Content-Type: {{contentType}}
 
 {
-    "correo": "alumno@gmail.com",
-    "password": "123456Aa!"
+    "correo": "elder@gmail.com",
+    "password": "elder1234"
 }
 
 ### Solicitar restablecimiento de contraseña (olvido de contraseña)
@@ -48,7 +48,7 @@ GET {{baseUrl}}/api/usuarios/listar
 Authorization: Bearer {{token}}
 
 ### Listar usuarios por rol
-GET {{baseUrl}}/api/usuarios/listar/ADMINISTRADOR
+GET {{baseUrl}}/api/usuarios/listar/DOCENTE
 Authorization: Bearer {{token}}
 
 ### Obtener usuario por ID
@@ -61,13 +61,13 @@ Content-Type: {{contentType}}
 Authorization: Bearer {{token}}
 
 {
-    "correo": "alumno@gmail.com",
-    "password": "123456Aa!",
-    "nombre": "Luchito",
-    "apellido": "Castillo J",
-    "numeroCelular": "123456789",
-    "rol": "ALUMNO",
-    "numeroIdentificacion": "87614321",
+    "correo": "bances@gmail.com",
+    "password": "123456789Aa!",
+    "nombre": "Luis",
+    "apellido": "Castillo JUnior",
+    "numeroCelular": "9873485734",
+    "rol": "DOCENTE",
+    "numeroIdentificacion": "23876423",
     "nombrePais": "Perú",
     "idTipoIdentificacion": 1
 }
@@ -123,7 +123,8 @@ Content-Type: {{contentType}}
 Authorization: Bearer {{token}}
 
 {
-    "nombre": "Seguridad Informática"
+    "nombre": "Desarrollo Web",
+    "descripcion": "Cursos relacionados con desarrollo web frontend y backend"
 }
 
 ### Eliminar categoría
@@ -143,7 +144,7 @@ GET {{baseUrl}}/api/cursos-diplomados/listar-index
 Authorization: Bearer {{token}}
 
 ### Obtener curso/diplomado por ID
-GET {{baseUrl}}/api/cursos-diplomados/obtener/5
+GET {{baseUrl}}/api/cursos-diplomados/obtener/1
 Authorization: Bearer {{token}}
 
 ### Crear curso/diplomado
@@ -152,8 +153,8 @@ Content-Type: {{contentType}}
 Authorization: Bearer {{token}}
 
 {
-    "titulo": "Administración de Redes 3",
-    "objetivo": "Curso avanzado de Base de Datos para desarrolladores",
+    "titulo": "Angular desde Cero",
+    "objetivo": "Aprender a desarrollar aplicaciones web con Angular",
     "idCategoria": 4,
     "tipo": false,
     "otorgaCertificado": true,
