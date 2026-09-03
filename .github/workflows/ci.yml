@@ -29,35 +29,34 @@ jobs:
       - name: Run tests
         run: ./mvnw test
 
-      - name: Build JAR
-        run: ./mvnw clean package -DskipTests
-
       - name: Get next version
         id: version
         run: |
           git fetch --tags
 
-          LAST_TAG=$(git tag --sort=-v:refname | head -n 1)
+          LAST_TAG=$(git tag -l "v[0-9]*" | sort -V | tail -n 1)
 
           if [ -z "$LAST_TAG" ]; then
-            NEW_VERSION="v1.0.0"
+            NEW_VERSION="v1"
           else
-            VERSION=${LAST_TAG#v}
-            IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
-            PATCH=$((PATCH + 1))
-            NEW_VERSION="v$MAJOR.$MINOR.$PATCH"
+            LAST_NUMBER=${LAST_TAG#v}
+            NEW_NUMBER=$((LAST_NUMBER + 1))
+            NEW_VERSION="v$NEW_NUMBER"
           fi
 
-          echo "version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
           echo "Nueva versión: $NEW_VERSION"
+          echo "version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Build JAR
+        run: ./mvnw clean package -DskipTests
 
       - name: Create Git tag
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git tag ${{ steps.version.outputs.version }}
-          git push origin ${{ steps.version.outputs.version }}
+          git tag "${{ steps.version.outputs.version }}"
+          git push origin "${{ steps.version.outputs.version }}"
 
       - name: Upload JAR
         uses: actions/upload-artifact@v4
