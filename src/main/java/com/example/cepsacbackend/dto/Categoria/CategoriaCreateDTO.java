@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class CategoriaCreateDTO {
-    @NotBlank(message = "El nombre no puede estar vacío")
+    @NotBlank(message = "El nombre no puede estar vacío.")
     @Size(max = 50, message = "El nombre no puede exceder los 50 caracteres")
     private String nombre;
 
