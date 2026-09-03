@@ -69,4 +69,13 @@ class CategoriaServiceImplTest {
         assertFalse(categoria.getEstado());
         verify(repository).save(categoria);
     }
+
+    @Test
+    void eliminarBorraCategoriaCuandoExiste() {
+        when(repository.existsById((short) 3)).thenReturn(true);
+
+        categoriaService.eliminar((short) 3);
+
+        verify(repository).deleteById((short) 3);
+    }
 }
